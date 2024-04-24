@@ -1,0 +1,14 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/html/
+hooks:
+  BeforeInstall:
+    - location: scripts/deregister_from_elb.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/register_with_elb.sh
+      timeout: 300
+      runas: root
